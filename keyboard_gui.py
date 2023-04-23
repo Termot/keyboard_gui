@@ -1,10 +1,6 @@
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.Qt import *
 
-import keyboard
-
-from numba import jit
-
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -982,87 +978,86 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.keyboard_activate()
 
-        # словарь счета нажатых символов и спец клавиш
-        self.smvls_dict = {
-            'q': 1, 'w': 0, 'e': 0, 'r': 0, 't': 0, 'y': 0, 'u': 0, 'i': 0, 'o': 0, 'p': 0,
-            'a': 0, 's': 0, 'd': 0, 'f': 0, 'g': 0, 'h': 0, 'j': 0, 'k': 0, 'l': 0,
-            'z': 0, 'x': 0, 'c': 0, 'v': 0, 'b': 0, 'n': 0, 'm': 0,
-
-            '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0, '9': 0, '0': 0,
-
-            '[': 0, ']': 0, ';': 0, "'": 0, ',': 0, '.': 0, '/': 0,
-
-            '`': 0, '-': 0, '=': 0,
-
-            'tab': 0, 'caps lock': 0, 'shift': 0, 'ctrl': 0, 'alt': 0, 'space': 0,
-            'left windows': 0, 'right alt': 0, 'right ctrl': 0
-        }
-
-        # имена переменных букв (клавиш на клавиатуре)
+        # {'нажатая клавиша': [имя клавиши, имя счета, количество нажатий]}
         self.btn_name = {
-            'q': self.btn_q, 'w': self.btn_w, 'e': self.btn_e, 'r': self.btn_r, 't': self.btn_t,
-            'y': self.btn_y, 'u': self.btn_u, 'i': self.btn_i, 'o': self.btn_o, 'p': self.btn_p,
-            'a': self.btn_a, 's': self.btn_s, 'd': self.btn_d, 'f': self.btn_f, 'g': self.btn_g,
-            'h': self.btn_h, 'j': self.btn_j, 'k': self.btn_k, 'l': self.btn_l,
-            'z': self.btn_z, 'x': self.btn_x, 'c': self.btn_c, 'v': self.btn_v, 'b': self.btn_b,
-            'n': self.btn_n, 'm': self.btn_m,
+            'й': [self.btn_q, self.scr_q, 0], 'ц': [self.btn_w, self.scr_w, 0], 'у': [self.btn_e, self.scr_e, 0],
+            'к': [self.btn_r, self.scr_r, 0], 'е': [self.btn_t, self.scr_t, 0],
+            'н': [self.btn_y, self.scr_y, 0], 'г': [self.btn_u, self.scr_u, 0], 'ш': [self.btn_i, self.scr_i, 0],
+            'щ': [self.btn_o, self.scr_o, 0], 'з': [self.btn_p, self.scr_p, 0],
+            'ф': [self.btn_a, self.scr_a, 0], 'ы': [self.btn_s, self.scr_s, 0], 'в': [self.btn_d, self.scr_d, 0],
+            'а': [self.btn_f, self.scr_f, 0], 'п': [self.btn_g, self.scr_g, 0],
+            'р': [self.btn_h, self.scr_h, 0], 'о': [self.btn_j, self.scr_j, 0], 'л': [self.btn_k, self.scr_k, 0],
+            'д': [self.btn_l, self.scr_l, 0],
+            'я': [self.btn_z, self.scr_z, 0], 'ч': [self.btn_x, self.scr_x, 0], 'с': [self.btn_c, self.scr_c, 0],
+            'м': [self.btn_v, self.scr_v, 0], 'и': [self.btn_b, self.scr_b, 0],
+            'т': [self.btn_n, self.scr_n, 0], 'ь': [self.btn_m, self.scr_m, 0],
 
-            '1': self.btn_1, '2': self.btn_2, '3': self.btn_3, '4': self.btn_4, '5': self.btn_5,
-            '6': self.btn_6, '7': self.btn_7, '8': self.btn_8, '9': self.btn_9, '0': self.btn_0,
+            'ё': [self.btn_tilde, self.scr_tilde, 0],
+            'х': [self.btn_op_scq_br, self.scr_op_scq_b, 0], 'ъ': [self.btn_cl_sqr_br, self.scr_cl_sqr_br, 0],
+            'ж': [self.btn_semicolon, self.scr_semicolon, 0], 'э': [self.btn_apstf, self.scr_apstrf, 0],
+            'б': [self.btn_comma, self.scr_comma, 0], 'ю': [self.btn_dot, self.scr_dot, 0],
 
-            '[': self.btn_op_scq_br, ']': self.btn_cl_sqr_br, ';': self.btn_semicolon,
-            "'": self.btn_apstf, ',': self.btn_comma, '.': self.btn_dot, '/': self.btn_f_slash,
+            'q': [self.btn_q, self.scr_q, 0], 'w': [self.btn_w, self.scr_w, 0], 'e': [self.btn_e, self.scr_e, 0],
+            'r': [self.btn_r, self.scr_r, 0], 't': [self.btn_t, self.scr_t, 0],
+            'y': [self.btn_y, self.scr_y, 0], 'u': [self.btn_u, self.scr_u, 0], 'i': [self.btn_i, self.scr_i, 0],
+            'o': [self.btn_o, self.scr_o, 0], 'p': [self.btn_p, self.scr_p, 0],
+            'a': [self.btn_a, self.scr_a, 0], 's': [self.btn_s, self.scr_s, 0], 'd': [self.btn_d, self.scr_d, 0],
+            'f': [self.btn_f, self.scr_f, 0], 'g': [self.btn_g, self.scr_g, 0],
+            'h': [self.btn_h, self.scr_h, 0], 'j': [self.btn_j, self.scr_j, 0], 'k': [self.btn_k, self.scr_k, 0],
+            'l': [self.btn_l, self.scr_l, 0],
+            'z': [self.btn_z, self.scr_z, 0], 'x': [self.btn_x, self.scr_x, 0], 'c': [self.btn_c, self.scr_c, 0],
+            'v': [self.btn_v, self.scr_v, 0], 'b': [self.btn_b, self.scr_b, 0],
+            'n': [self.btn_n, self.scr_n, 0], 'm': [self.btn_m, self.scr_m, 0],
 
-            '`': self.btn_tilde, '-': self.btn_minus, '=': self.btn_equal,
+            '1': [self.btn_1, self.scr_n_1, 0], '2': [self.btn_2, self.scr_n_2, 0], '3': [self.btn_3, self.scr_n_3, 0],
+            '4': [self.btn_4, self.scr_n_4, 0], '5': [self.btn_5, self.scr_n_5, 0],
+            '6': [self.btn_6, self.scr_n_6, 0], '7': [self.btn_7, self.scr_n_7, 0], '8': [self.btn_8, self.scr_n_8, 0],
+            '9': [self.btn_9, self.scr_n_9, 0], '0': [self.btn_0, self.scr_n_0, 0],
 
-            'tab': self.btn_tab, 'caps lock': self.btn_capslock, 'shift': self.btn_shift,
-            'ctrl': self.btn_ctrl, 'alt': self.btn_alt, 'space': self.btn_space,
-            'left windows': self.btn_win, 'right alt': self.btn_ralt, 'right ctrl': self.btn_rctrl
-        }
+            '[': [self.btn_op_scq_br, self.scr_op_scq_b, 0], ']': [self.btn_cl_sqr_br, self.scr_cl_sqr_br, 0],
+            ';': [self.btn_semicolon, self.scr_semicolon, 0],
+            "'": [self.btn_apstf, self.scr_apstrf, 0], ',': [self.btn_comma, self.scr_comma, 0],
+            '.': [self.btn_dot, self.scr_dot, 0], '/': [self.btn_f_slash, self.scr_f_slash, 0],
 
-        # имена переменных счета (циферки под бувами)
-        self.scr_name = {
-            'q': self.scr_q, 'w': self.scr_w, 'e': self.scr_e, 'r': self.scr_r, 't': self.scr_t,
-            'y': self.scr_y, 'u': self.scr_u, 'i': self.scr_i, 'o': self.scr_o, 'p': self.scr_p,
-            'a': self.scr_a, 's': self.scr_s, 'd': self.scr_d, 'f': self.scr_f, 'g': self.scr_g,
-            'h': self.scr_h, 'j': self.scr_j, 'k': self.scr_k, 'l': self.scr_l,
-            'z': self.scr_z, 'x': self.scr_x, 'c': self.scr_c, 'v': self.scr_v, 'b': self.scr_b,
-            'n': self.scr_n, 'm': self.scr_m,
+            '`': [self.btn_tilde, self.scr_tilde, 0], '-': [self.btn_minus, self.scr_minus, 0],
+            '=': [self.btn_equal, self.scr_ecuals, 0],
 
-            '1': self.scr_n_1, '2': self.scr_n_2, '3': self.scr_n_3, '4': self.scr_n_4, '5': self.scr_n_5,
-            '6': self.scr_n_6, '7': self.scr_n_7, '8': self.scr_n_8, '9': self.scr_n_9, '0': self.scr_n_0,
-
-            '[': self.scr_op_scq_b, ']': self.scr_cl_sqr_br, ';': self.scr_semicolon,
-            "'": self.scr_apstrf, ',': self.scr_comma, '.': self.scr_dot, '/': self.scr_f_slash,
-
-            '`': self.scr_tilde, '-': self.scr_minus, '=': self.scr_ecuals,
-
-            'tab': self.scr_tab, 'caps lock': self.scr_capslock, 'shift': self.scr_shift,
-            'ctrl': self.scr_ctrl, 'alt': self.scr_alt, 'space': self.scr_space,
-            'left windows': self.scr_win, 'right alt': self.scr_ralt, 'right ctrl': self.scr_rctrl
+            'tab': [self.btn_tab, self.scr_tab, 0], 'caps lock': [self.btn_capslock, self.scr_capslock, 0],
+            'shift': [self.btn_shift, self.scr_shift, 0],
+            'ctrl': [self.btn_ctrl, self.scr_ctrl, 0], 'alt': [self.btn_alt, self.scr_alt, 0],
+            'space': [self.btn_space, self.scr_space, 0],
+            'left windows': [self.btn_win, self.scr_win, 0], 'right alt': [self.btn_ralt, self.scr_ralt, 0],
+            'right ctrl': [self.btn_rctrl, self.scr_rctrl, 0]
         }
 
     def keyboard_activate(self):
-        keyboard.hook(self.print_pressed_keys)
+        keyboard.hook(self.hook_pressed_keys)
 
     # когда отпустили клавишу прибавляем единицу к счету нажатия
-    def print_pressed_keys(self, e):
+    def hook_pressed_keys(self, e):
+        btn = str(e.name).lower()
         if e.event_type == 'down':
-            btn = str(e.name).lower()
-
             # меняем фон клавиш
-            btn_name = self.btn_name.get(btn)
+            btn_name = self.btn_name.get(btn)[0]
             btn_name.setStyleSheet("background-color: rgb(186, 186, 186);")
 
         if e.event_type == 'up':
-            btn = str(e.name).lower()
-
             # меняем фон клавиш
-            # RG_num(self.smvls_dict, self.btn_name)
-            btn_name = self.btn_name.get(btn)
+            btn_name = self.btn_name.get(btn)[0]
             btn_name.setStyleSheet("background-color: rgb(240, 240, 240);")
 
             # добавляем 1 к числу нажатой клавиши
-            if btn in self.smvls_dict:
-                self.smvls_dict[btn] += 1
-                self.scr_name[btn].setText(str(self.smvls_dict[btn]))
+            self.btn_name[btn][2] += 1
+            self.btn_name[btn][1].setText(str(self.btn_name[btn][2]))
+
+
+if __name__ == "__main__":
+    import sys
+    import keyboard
+
+    app = QtWidgets.QApplication(sys.argv)
+
+    w = MainWindow()
+    w.show()
+
+    sys.exit(app.exec_())
