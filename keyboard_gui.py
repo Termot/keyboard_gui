@@ -1,5 +1,9 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtWidgets
 from PyQt5.Qt import *
+
+import keyboard
+
+from numba import jit
 
 
 class Ui_MainWindow(object):
@@ -9,28 +13,28 @@ class Ui_MainWindow(object):
         MainWindow.setMinimumSize(QtCore.QSize(0, 70))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        
+
         self.gridLayoutWidget = QtWidgets.QWidget(self.centralwidget)
         self.gridLayoutWidget.setGeometry(QtCore.QRect(80, 70, 721, 61))
         self.gridLayoutWidget.setAutoFillBackground(True)
         self.gridLayoutWidget.setObjectName("gridLayoutWidget")
-        
+
         self.qwe = QtWidgets.QGridLayout(self.gridLayoutWidget)
         self.qwe.setContentsMargins(0, 0, 0, 0)
         self.qwe.setObjectName("qwe")
-        
+
         self.btn_w = QtWidgets.QLabel(self.gridLayoutWidget)
         self.btn_w.setAutoFillBackground(True)
         self.btn_w.setAlignment(QtCore.Qt.AlignCenter)
         self.btn_w.setObjectName("btn_w")
         self.qwe.addWidget(self.btn_w, 0, 1, 1, 1)
-        
+
         self.btn_u = QtWidgets.QLabel(self.gridLayoutWidget)
         self.btn_u.setAutoFillBackground(True)
         self.btn_u.setAlignment(QtCore.Qt.AlignCenter)
         self.btn_u.setObjectName("btn_u")
         self.qwe.addWidget(self.btn_u, 0, 6, 1, 1)
-        
+
         self.btn_q = QtWidgets.QLabel(self.gridLayoutWidget)
         self.btn_q.setMinimumSize(QtCore.QSize(54, 40))
         self.btn_q.setMaximumSize(QtCore.QSize(16777215, 40))
@@ -40,43 +44,43 @@ class Ui_MainWindow(object):
         self.btn_q.setAlignment(QtCore.Qt.AlignCenter)
         self.btn_q.setObjectName("btn_q")
         self.qwe.addWidget(self.btn_q, 0, 0, 1, 1)
-        
+
         self.btn_o = QtWidgets.QLabel(self.gridLayoutWidget)
         self.btn_o.setAutoFillBackground(True)
         self.btn_o.setAlignment(QtCore.Qt.AlignCenter)
         self.btn_o.setObjectName("btn_o")
         self.qwe.addWidget(self.btn_o, 0, 8, 1, 1)
-        
+
         self.btn_op_scq_br = QtWidgets.QLabel(self.gridLayoutWidget)
         self.btn_op_scq_br.setAutoFillBackground(True)
         self.btn_op_scq_br.setAlignment(QtCore.Qt.AlignCenter)
         self.btn_op_scq_br.setObjectName("btn_op_scq_br")
         self.qwe.addWidget(self.btn_op_scq_br, 0, 10, 1, 1)
-        
+
         self.btn_p = QtWidgets.QLabel(self.gridLayoutWidget)
         self.btn_p.setAutoFillBackground(True)
         self.btn_p.setAlignment(QtCore.Qt.AlignCenter)
         self.btn_p.setObjectName("btn_p")
         self.qwe.addWidget(self.btn_p, 0, 9, 1, 1)
-        
+
         self.btn_i = QtWidgets.QLabel(self.gridLayoutWidget)
         self.btn_i.setAutoFillBackground(True)
         self.btn_i.setAlignment(QtCore.Qt.AlignCenter)
         self.btn_i.setObjectName("btn_i")
         self.qwe.addWidget(self.btn_i, 0, 7, 1, 1)
-        
+
         self.btn_y = QtWidgets.QLabel(self.gridLayoutWidget)
         self.btn_y.setAutoFillBackground(True)
         self.btn_y.setAlignment(QtCore.Qt.AlignCenter)
         self.btn_y.setObjectName("btn_y")
         self.qwe.addWidget(self.btn_y, 0, 5, 1, 1)
-        
+
         self.btn_t = QtWidgets.QLabel(self.gridLayoutWidget)
         self.btn_t.setAutoFillBackground(True)
         self.btn_t.setAlignment(QtCore.Qt.AlignCenter)
         self.btn_t.setObjectName("btn_t")
         self.qwe.addWidget(self.btn_t, 0, 4, 1, 1)
-       
+
         self.scr_p = QtWidgets.QLabel(self.gridLayoutWidget)
         self.scr_p.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.scr_p.setAutoFillBackground(True)
@@ -84,7 +88,7 @@ class Ui_MainWindow(object):
         self.scr_p.setAlignment(QtCore.Qt.AlignCenter)
         self.scr_p.setObjectName("scr_p")
         self.qwe.addWidget(self.scr_p, 1, 9, 1, 1)
-        
+
         self.scr_i = QtWidgets.QLabel(self.gridLayoutWidget)
         self.scr_i.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.scr_i.setAutoFillBackground(True)
@@ -92,13 +96,13 @@ class Ui_MainWindow(object):
         self.scr_i.setAlignment(QtCore.Qt.AlignCenter)
         self.scr_i.setObjectName("scr_i")
         self.qwe.addWidget(self.scr_i, 1, 7, 1, 1)
-        
+
         self.btn_cl_sqr_br = QtWidgets.QLabel(self.gridLayoutWidget)
         self.btn_cl_sqr_br.setAutoFillBackground(True)
         self.btn_cl_sqr_br.setAlignment(QtCore.Qt.AlignCenter)
         self.btn_cl_sqr_br.setObjectName("btn_cl_sqr_br")
         self.qwe.addWidget(self.btn_cl_sqr_br, 0, 11, 1, 1)
-        
+
         self.scr_op_scq_b = QtWidgets.QLabel(self.gridLayoutWidget)
         self.scr_op_scq_b.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.scr_op_scq_b.setAutoFillBackground(True)
@@ -106,7 +110,7 @@ class Ui_MainWindow(object):
         self.scr_op_scq_b.setAlignment(QtCore.Qt.AlignCenter)
         self.scr_op_scq_b.setObjectName("scr_op_scq_b")
         self.qwe.addWidget(self.scr_op_scq_b, 1, 10, 1, 1)
-        
+
         self.scr_w = QtWidgets.QLabel(self.gridLayoutWidget)
         self.scr_w.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.scr_w.setAutoFillBackground(True)
@@ -114,7 +118,7 @@ class Ui_MainWindow(object):
         self.scr_w.setAlignment(QtCore.Qt.AlignCenter)
         self.scr_w.setObjectName("scr_w")
         self.qwe.addWidget(self.scr_w, 1, 1, 1, 1)
-        
+
         self.scr_cl_sqr_br = QtWidgets.QLabel(self.gridLayoutWidget)
         self.scr_cl_sqr_br.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.scr_cl_sqr_br.setAutoFillBackground(True)
@@ -122,7 +126,7 @@ class Ui_MainWindow(object):
         self.scr_cl_sqr_br.setAlignment(QtCore.Qt.AlignCenter)
         self.scr_cl_sqr_br.setObjectName("scr_cl_sqr_br")
         self.qwe.addWidget(self.scr_cl_sqr_br, 1, 11, 1, 1)
-        
+
         self.scr_t = QtWidgets.QLabel(self.gridLayoutWidget)
         self.scr_t.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.scr_t.setAutoFillBackground(True)
@@ -130,7 +134,7 @@ class Ui_MainWindow(object):
         self.scr_t.setAlignment(QtCore.Qt.AlignCenter)
         self.scr_t.setObjectName("scr_t")
         self.qwe.addWidget(self.scr_t, 1, 4, 1, 1)
-        
+
         self.scr_y = QtWidgets.QLabel(self.gridLayoutWidget)
         self.scr_y.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.scr_y.setAutoFillBackground(True)
@@ -138,7 +142,7 @@ class Ui_MainWindow(object):
         self.scr_y.setAlignment(QtCore.Qt.AlignCenter)
         self.scr_y.setObjectName("scr_y")
         self.qwe.addWidget(self.scr_y, 1, 5, 1, 1)
-        
+
         self.scr_u = QtWidgets.QLabel(self.gridLayoutWidget)
         self.scr_u.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.scr_u.setAutoFillBackground(True)
@@ -146,7 +150,7 @@ class Ui_MainWindow(object):
         self.scr_u.setAlignment(QtCore.Qt.AlignCenter)
         self.scr_u.setObjectName("scr_u")
         self.qwe.addWidget(self.scr_u, 1, 6, 1, 1)
-        
+
         self.scr_o = QtWidgets.QLabel(self.gridLayoutWidget)
         self.scr_o.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.scr_o.setAutoFillBackground(True)
@@ -154,7 +158,7 @@ class Ui_MainWindow(object):
         self.scr_o.setAlignment(QtCore.Qt.AlignCenter)
         self.scr_o.setObjectName("scr_o")
         self.qwe.addWidget(self.scr_o, 1, 8, 1, 1)
-        
+
         self.scr_e = QtWidgets.QLabel(self.gridLayoutWidget)
         self.scr_e.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.scr_e.setAutoFillBackground(True)
@@ -162,7 +166,7 @@ class Ui_MainWindow(object):
         self.scr_e.setAlignment(QtCore.Qt.AlignCenter)
         self.scr_e.setObjectName("scr_e")
         self.qwe.addWidget(self.scr_e, 1, 2, 1, 1)
-        
+
         self.scr_r = QtWidgets.QLabel(self.gridLayoutWidget)
         self.scr_r.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.scr_r.setAutoFillBackground(True)
@@ -170,19 +174,19 @@ class Ui_MainWindow(object):
         self.scr_r.setAlignment(QtCore.Qt.AlignCenter)
         self.scr_r.setObjectName("scr_r")
         self.qwe.addWidget(self.scr_r, 1, 3, 1, 1)
-        
+
         self.btn_r = QtWidgets.QLabel(self.gridLayoutWidget)
         self.btn_r.setAutoFillBackground(True)
         self.btn_r.setAlignment(QtCore.Qt.AlignCenter)
         self.btn_r.setObjectName("btn_r")
         self.qwe.addWidget(self.btn_r, 0, 3, 1, 1)
-        
+
         self.btn_e = QtWidgets.QLabel(self.gridLayoutWidget)
         self.btn_e.setAutoFillBackground(True)
         self.btn_e.setAlignment(QtCore.Qt.AlignCenter)
         self.btn_e.setObjectName("btn_e")
         self.qwe.addWidget(self.btn_e, 0, 2, 1, 1)
-        
+
         self.scr_q = QtWidgets.QLabel(self.gridLayoutWidget)
         self.scr_q.setMaximumSize(QtCore.QSize(16777215, 13))
         self.scr_q.setLayoutDirection(QtCore.Qt.LeftToRight)
@@ -191,34 +195,34 @@ class Ui_MainWindow(object):
         self.scr_q.setAlignment(QtCore.Qt.AlignCenter)
         self.scr_q.setObjectName("scr_q")
         self.qwe.addWidget(self.scr_q, 1, 0, 1, 1)
-        
+
         self.gridLayoutWidget_2 = QtWidgets.QWidget(self.centralwidget)
         self.gridLayoutWidget_2.setGeometry(QtCore.QRect(90, 130, 661, 61))
         self.gridLayoutWidget_2.setAutoFillBackground(True)
         self.gridLayoutWidget_2.setObjectName("gridLayoutWidget_2")
-        
+
         self.asd = QtWidgets.QGridLayout(self.gridLayoutWidget_2)
         self.asd.setContentsMargins(0, 0, 0, 0)
         self.asd.setObjectName("asd")
-        
+
         self.btn_g = QtWidgets.QLabel(self.gridLayoutWidget_2)
         self.btn_g.setAutoFillBackground(True)
         self.btn_g.setAlignment(QtCore.Qt.AlignCenter)
         self.btn_g.setObjectName("btn_g")
         self.asd.addWidget(self.btn_g, 0, 4, 1, 1)
-        
+
         self.btn_d = QtWidgets.QLabel(self.gridLayoutWidget_2)
         self.btn_d.setAutoFillBackground(True)
         self.btn_d.setAlignment(QtCore.Qt.AlignCenter)
         self.btn_d.setObjectName("btn_d")
         self.asd.addWidget(self.btn_d, 0, 2, 1, 1)
-        
+
         self.btn_f = QtWidgets.QLabel(self.gridLayoutWidget_2)
         self.btn_f.setAutoFillBackground(True)
         self.btn_f.setAlignment(QtCore.Qt.AlignCenter)
         self.btn_f.setObjectName("btn_f")
         self.asd.addWidget(self.btn_f, 0, 3, 1, 1)
-        
+
         self.scr_a = QtWidgets.QLabel(self.gridLayoutWidget_2)
         self.scr_a.setMaximumSize(QtCore.QSize(16777215, 13))
         self.scr_a.setLayoutDirection(QtCore.Qt.LeftToRight)
@@ -227,7 +231,7 @@ class Ui_MainWindow(object):
         self.scr_a.setAlignment(QtCore.Qt.AlignCenter)
         self.scr_a.setObjectName("scr_a")
         self.asd.addWidget(self.scr_a, 1, 0, 1, 1)
-        
+
         self.btn_a = QtWidgets.QLabel(self.gridLayoutWidget_2)
         self.btn_a.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.btn_a.setAutoFillBackground(True)
@@ -235,49 +239,49 @@ class Ui_MainWindow(object):
         self.btn_a.setAlignment(QtCore.Qt.AlignCenter)
         self.btn_a.setObjectName("btn_a")
         self.asd.addWidget(self.btn_a, 0, 0, 1, 1)
-        
+
         self.btn_semicolon = QtWidgets.QLabel(self.gridLayoutWidget_2)
         self.btn_semicolon.setAutoFillBackground(True)
         self.btn_semicolon.setAlignment(QtCore.Qt.AlignCenter)
         self.btn_semicolon.setObjectName("btn_semicolon")
         self.asd.addWidget(self.btn_semicolon, 0, 9, 1, 1)
-        
+
         self.btn_k = QtWidgets.QLabel(self.gridLayoutWidget_2)
         self.btn_k.setAutoFillBackground(True)
         self.btn_k.setAlignment(QtCore.Qt.AlignCenter)
         self.btn_k.setObjectName("btn_k")
         self.asd.addWidget(self.btn_k, 0, 7, 1, 1)
-        
+
         self.btn_h = QtWidgets.QLabel(self.gridLayoutWidget_2)
         self.btn_h.setAutoFillBackground(True)
         self.btn_h.setAlignment(QtCore.Qt.AlignCenter)
         self.btn_h.setObjectName("btn_h")
         self.asd.addWidget(self.btn_h, 0, 5, 1, 1)
-        
+
         self.btn_s = QtWidgets.QLabel(self.gridLayoutWidget_2)
         self.btn_s.setAutoFillBackground(True)
         self.btn_s.setAlignment(QtCore.Qt.AlignCenter)
         self.btn_s.setObjectName("btn_s")
         self.asd.addWidget(self.btn_s, 0, 1, 1, 1)
-        
+
         self.btn_j = QtWidgets.QLabel(self.gridLayoutWidget_2)
         self.btn_j.setAutoFillBackground(True)
         self.btn_j.setAlignment(QtCore.Qt.AlignCenter)
         self.btn_j.setObjectName("btn_j")
         self.asd.addWidget(self.btn_j, 0, 6, 1, 1)
-        
+
         self.btn_l = QtWidgets.QLabel(self.gridLayoutWidget_2)
         self.btn_l.setAutoFillBackground(True)
         self.btn_l.setAlignment(QtCore.Qt.AlignCenter)
         self.btn_l.setObjectName("btn_l")
         self.asd.addWidget(self.btn_l, 0, 8, 1, 1)
-        
+
         self.btn_apstf = QtWidgets.QLabel(self.gridLayoutWidget_2)
         self.btn_apstf.setAutoFillBackground(True)
         self.btn_apstf.setAlignment(QtCore.Qt.AlignCenter)
         self.btn_apstf.setObjectName("btn_apstf")
         self.asd.addWidget(self.btn_apstf, 0, 10, 1, 1)
-        
+
         self.scr_s = QtWidgets.QLabel(self.gridLayoutWidget_2)
         self.scr_s.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.scr_s.setAutoFillBackground(True)
@@ -285,7 +289,7 @@ class Ui_MainWindow(object):
         self.scr_s.setAlignment(QtCore.Qt.AlignCenter)
         self.scr_s.setObjectName("scr_s")
         self.asd.addWidget(self.scr_s, 1, 1, 1, 1)
-        
+
         self.scr_d = QtWidgets.QLabel(self.gridLayoutWidget_2)
         self.scr_d.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.scr_d.setAutoFillBackground(True)
@@ -293,7 +297,7 @@ class Ui_MainWindow(object):
         self.scr_d.setAlignment(QtCore.Qt.AlignCenter)
         self.scr_d.setObjectName("scr_d")
         self.asd.addWidget(self.scr_d, 1, 2, 1, 1)
-        
+
         self.scr_f = QtWidgets.QLabel(self.gridLayoutWidget_2)
         self.scr_f.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.scr_f.setAutoFillBackground(True)
@@ -301,7 +305,7 @@ class Ui_MainWindow(object):
         self.scr_f.setAlignment(QtCore.Qt.AlignCenter)
         self.scr_f.setObjectName("scr_f")
         self.asd.addWidget(self.scr_f, 1, 3, 1, 1)
-        
+
         self.scr_g = QtWidgets.QLabel(self.gridLayoutWidget_2)
         self.scr_g.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.scr_g.setAutoFillBackground(True)
@@ -309,7 +313,7 @@ class Ui_MainWindow(object):
         self.scr_g.setAlignment(QtCore.Qt.AlignCenter)
         self.scr_g.setObjectName("scr_g")
         self.asd.addWidget(self.scr_g, 1, 4, 1, 1)
-        
+
         self.scr_h = QtWidgets.QLabel(self.gridLayoutWidget_2)
         self.scr_h.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.scr_h.setAutoFillBackground(True)
@@ -317,7 +321,7 @@ class Ui_MainWindow(object):
         self.scr_h.setAlignment(QtCore.Qt.AlignCenter)
         self.scr_h.setObjectName("scr_h")
         self.asd.addWidget(self.scr_h, 1, 5, 1, 1)
-        
+
         self.scr_j = QtWidgets.QLabel(self.gridLayoutWidget_2)
         self.scr_j.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.scr_j.setAutoFillBackground(True)
@@ -325,7 +329,7 @@ class Ui_MainWindow(object):
         self.scr_j.setAlignment(QtCore.Qt.AlignCenter)
         self.scr_j.setObjectName("scr_j")
         self.asd.addWidget(self.scr_j, 1, 6, 1, 1)
-        
+
         self.scr_k = QtWidgets.QLabel(self.gridLayoutWidget_2)
         self.scr_k.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.scr_k.setAutoFillBackground(True)
@@ -333,7 +337,7 @@ class Ui_MainWindow(object):
         self.scr_k.setAlignment(QtCore.Qt.AlignCenter)
         self.scr_k.setObjectName("scr_k")
         self.asd.addWidget(self.scr_k, 1, 7, 1, 1)
-        
+
         self.scr_l = QtWidgets.QLabel(self.gridLayoutWidget_2)
         self.scr_l.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.scr_l.setAutoFillBackground(True)
@@ -341,7 +345,7 @@ class Ui_MainWindow(object):
         self.scr_l.setAlignment(QtCore.Qt.AlignCenter)
         self.scr_l.setObjectName("scr_l")
         self.asd.addWidget(self.scr_l, 1, 8, 1, 1)
-        
+
         self.scr_semicolon = QtWidgets.QLabel(self.gridLayoutWidget_2)
         self.scr_semicolon.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.scr_semicolon.setAutoFillBackground(True)
@@ -349,7 +353,7 @@ class Ui_MainWindow(object):
         self.scr_semicolon.setAlignment(QtCore.Qt.AlignCenter)
         self.scr_semicolon.setObjectName("scr_semicolon")
         self.asd.addWidget(self.scr_semicolon, 1, 9, 1, 1)
-        
+
         self.scr_apstrf = QtWidgets.QLabel(self.gridLayoutWidget_2)
         self.scr_apstrf.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.scr_apstrf.setAutoFillBackground(True)
@@ -357,7 +361,7 @@ class Ui_MainWindow(object):
         self.scr_apstrf.setAlignment(QtCore.Qt.AlignCenter)
         self.scr_apstrf.setObjectName("scr_apstrf")
         self.asd.addWidget(self.scr_apstrf, 1, 10, 1, 1)
-        
+
         self.gridLayoutWidget_3 = QtWidgets.QWidget(self.centralwidget)
         self.gridLayoutWidget_3.setGeometry(QtCore.QRect(120, 190, 601, 61))
         self.gridLayoutWidget_3.setAutoFillBackground(True)
@@ -977,123 +981,44 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
         self.keyboard_activate()
-        self.keys_name()
-
-
-    def keyboard_activate(self):
-        keyboard.hook(self.print_pressed_keys)
-
-
-    # при нажатии клавиши прибавляем единицу к счету нажатия
-    def click_up(self, name, smvls_dict):
-        if name in smvls_dict:
-            smvls_dict[name] += 1
-
-            scr_name = self.scr_name.get(name)
-            self.scr_name[name].setText(str(smvls_dict[name]))
-
-
-    # меняем фон клавиш при их нажатии
-    def background(self, type_, name):
-        print(f'type = {type_}')
-        print(f'name = {name}')
-
-
-        btn_name = self.btn_name.get(name)
-        if btn_name is None:
-            print(f'btn_name = {btn_name} ??????????????? ')
-            print('''Внимание 
-                Что-то пошло не так. Проверьте "self.btn_name = {...}"
-            ''') 
-            return
-        print(f'btn_name = {btn_name.text()} ++++++++++++ ')
-
-        if type_ == 'on':
-            btn_name.setStyleSheet("background-color: rgb(186, 186, 186);")
-        if type_ == 'off':
-            btn_name.setStyleSheet("background-color: rgb(240, 240, 240);")
-
-
-    def ru2en(self, btn):
-        simvols_ru = ['ё','й','ц','у','к','е','н','г','ш','щ','з','х','ъ',
-                      'ф','ы','в','а','п','р','о','л','д','ж','э',
-                      'я','ч','с','м','и','т','ь','б','ю', '.']
-
-        simvols_en = ['`','q','w','e','r','t','y','u','i','o','p','[',']',
-                      'a','s','d','f','g','h','j','k','l',';',"'",
-                      'z','x','c','v','b','n','m',',','.', '/']
-
-        # пеоеводим символы русской клавиатуры в символы английской
-        if btn in simvols_ru:
-            btn = simvols_en[simvols_ru.index(btn)]
-        return btn
-
-
-    def print_pressed_keys(self, e):
-        if e.event_type == 'down':
-            # превращаем в строку
-            # переводим в нижний регистр
-            # меняем русскую раскладку на английскую
-            btn = self.ru2en((str(e.name)).lower())
-
-            print(f'\ndef print_pressed_keys(self, e): btn = {btn} ????????????')
-            self.background('on', btn)
-
-        if e.event_type == 'up':
-            btn = self.ru2en((str(e.name)).lower())
-            
-            self.background('off', btn)
-
-            smvls_dict = self.smvls_dict
-
-            if btn in smvls_dict:
-                self.click_up(btn, smvls_dict)
-
-
-    # функция содержит в себе словари
-    # 1. счета нажатых клавиш (letters_dict, smvls_dict)
-    # 2. имена переменных соответствующие нажатым клавишам 
-    #    получаемых с e.name (btn_name, scr_nameм)
-    def keys_name(self):
-        # словарь счета нажатых букв
-        self.letters_dict = {
-            'q': 0, 'w': 0, 'e': 0, 'r': 0, 't': 0, 'y': 0, 'u': 0, 'i': 0, 'o': 0, 'p': 0,
-            'a': 0, 's': 0, 'd': 0, 'f': 0, 'g': 0, 'h': 0, 'j': 0, 'k': 0, 'l': 0,
-            'z': 0, 'x': 0, 'c': 0, 'v': 0, 'b': 0, 'n': 0, 'm': 0}
 
         # словарь счета нажатых символов и спец клавиш
         self.smvls_dict = {
-            'q': 0, 'w': 0, 'e': 0, 'r': 0, 't': 0, 'y': 0, 'u': 0, 'i': 0, 'o': 0, 'p': 0,
+            'q': 1, 'w': 0, 'e': 0, 'r': 0, 't': 0, 'y': 0, 'u': 0, 'i': 0, 'o': 0, 'p': 0,
             'a': 0, 's': 0, 'd': 0, 'f': 0, 'g': 0, 'h': 0, 'j': 0, 'k': 0, 'l': 0,
             'z': 0, 'x': 0, 'c': 0, 'v': 0, 'b': 0, 'n': 0, 'm': 0,
-            '+': 0, '*': 0, '-': 0, '-': 0, '=': 0,
-            '`': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0, '9': 0, '0': 0,
-            ',': 0, '.': 0, '/': 0, ';': 0, "'": 0, '[': 0, ']': 0, 
-            'tab': 0, 'caps lock': 0, 'shift': 0, 'ctrl': 0, 'alt': 0, 'space': 0, 'enter': 0,
-            'right alt': 0, 'right ctrl': 0, 'right shift': 0, 'left windows': 0,
-            'right': 0, 'left': 0, 'up': 0, 'down': 0,
-            'num lock': 0, 'insert': 0, 'end': 0, 'home': 0, 'page down': 0, 'page up': 0, 'clear': 0}
+
+            '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0, '9': 0, '0': 0,
+
+            '[': 0, ']': 0, ';': 0, "'": 0, ',': 0, '.': 0, '/': 0,
+
+            '`': 0, '-': 0, '=': 0,
+
+            'tab': 0, 'caps lock': 0, 'shift': 0, 'ctrl': 0, 'alt': 0, 'space': 0,
+            'left windows': 0, 'right alt': 0, 'right ctrl': 0
+        }
 
         # имена переменных букв (клавиш на клавиатуре)
         self.btn_name = {
-            'q': self.btn_q, 'w': self.btn_w, 'e': self.btn_e, 
-            'r': self.btn_r, 't': self.btn_t, 
-            'y': self.btn_y, 'u': self.btn_u, 'i': self.btn_i, 'o': self.btn_o, 'p': self.btn_p, 
-            'a': self.btn_a, 's': self.btn_s, 'd': self.btn_d, 'f': self.btn_f, 'g': self.btn_g, 
-            'h': self.btn_h, 'j': self.btn_j, 'k': self.btn_k, 'l': self.btn_l, 
-            'z': self.btn_z, 'x': self.btn_x, 'c': self.btn_c, 'v': self.btn_v, 'b': self.btn_b, 
+            'q': self.btn_q, 'w': self.btn_w, 'e': self.btn_e, 'r': self.btn_r, 't': self.btn_t,
+            'y': self.btn_y, 'u': self.btn_u, 'i': self.btn_i, 'o': self.btn_o, 'p': self.btn_p,
+            'a': self.btn_a, 's': self.btn_s, 'd': self.btn_d, 'f': self.btn_f, 'g': self.btn_g,
+            'h': self.btn_h, 'j': self.btn_j, 'k': self.btn_k, 'l': self.btn_l,
+            'z': self.btn_z, 'x': self.btn_x, 'c': self.btn_c, 'v': self.btn_v, 'b': self.btn_b,
             'n': self.btn_n, 'm': self.btn_m,
 
-            '[':self.btn_op_scq_br, ']': self.btn_cl_sqr_br, ';': self.btn_semicolon, 
-            "'":self.btn_apstf, ',': self.btn_comma, '.': self.btn_dot, '/': self.btn_f_slash, 
-
-            '`': self.btn_tilde, '-': self.btn_minus, '=': self.btn_equal,
-            '1': self.btn_1, '2': self.btn_2, '3': self.btn_3, '4': self.btn_4, '5': self.btn_5, 
+            '1': self.btn_1, '2': self.btn_2, '3': self.btn_3, '4': self.btn_4, '5': self.btn_5,
             '6': self.btn_6, '7': self.btn_7, '8': self.btn_8, '9': self.btn_9, '0': self.btn_0,
 
-            'tab': self.btn_tab, 'caps lock': self.btn_capslock, 'shift': self.btn_shift, 
+            '[': self.btn_op_scq_br, ']': self.btn_cl_sqr_br, ';': self.btn_semicolon,
+            "'": self.btn_apstf, ',': self.btn_comma, '.': self.btn_dot, '/': self.btn_f_slash,
+
+            '`': self.btn_tilde, '-': self.btn_minus, '=': self.btn_equal,
+
+            'tab': self.btn_tab, 'caps lock': self.btn_capslock, 'shift': self.btn_shift,
             'ctrl': self.btn_ctrl, 'alt': self.btn_alt, 'space': self.btn_space,
-            'left windows': self.btn_win, 'right alt': self.btn_ralt, 'right ctrl': self.btn_rctrl}
+            'left windows': self.btn_win, 'right alt': self.btn_ralt, 'right ctrl': self.btn_rctrl
+        }
 
         # имена переменных счета (циферки под бувами)
         self.scr_name = {
@@ -1104,30 +1029,40 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             'z': self.scr_z, 'x': self.scr_x, 'c': self.scr_c, 'v': self.scr_v, 'b': self.scr_b,
             'n': self.scr_n, 'm': self.scr_m,
 
-            '[': self.scr_op_scq_b, ']': self.scr_cl_sqr_br, ';': self.scr_semicolon,
-             "'": self.scr_apstrf, ',': self.scr_comma, '.': self.scr_dot, '/': self.scr_f_slash,
-
-            '`': self.scr_tilde, '-': self.scr_minus, '=': self.scr_ecuals,
             '1': self.scr_n_1, '2': self.scr_n_2, '3': self.scr_n_3, '4': self.scr_n_4, '5': self.scr_n_5,
             '6': self.scr_n_6, '7': self.scr_n_7, '8': self.scr_n_8, '9': self.scr_n_9, '0': self.scr_n_0,
 
+            '[': self.scr_op_scq_b, ']': self.scr_cl_sqr_br, ';': self.scr_semicolon,
+            "'": self.scr_apstrf, ',': self.scr_comma, '.': self.scr_dot, '/': self.scr_f_slash,
+
+            '`': self.scr_tilde, '-': self.scr_minus, '=': self.scr_ecuals,
+
             'tab': self.scr_tab, 'caps lock': self.scr_capslock, 'shift': self.scr_shift,
             'ctrl': self.scr_ctrl, 'alt': self.scr_alt, 'space': self.scr_space,
-            'left windows': self.scr_win, 'right alt': self.scr_ralt, 'right ctrl': self.scr_rctrl}
+            'left windows': self.scr_win, 'right alt': self.scr_ralt, 'right ctrl': self.scr_rctrl
+        }
 
+    def keyboard_activate(self):
+        keyboard.hook(self.print_pressed_keys)
 
-if __name__ == "__main__":
-    import sys
-    import keyboard
+    # когда отпустили клавишу прибавляем единицу к счету нажатия
+    def print_pressed_keys(self, e):
+        if e.event_type == 'down':
+            btn = str(e.name).lower()
 
-    app = QtWidgets.QApplication(sys.argv)
-    
-#    MainWindow = QtWidgets.QMainWindow()
-#    ui = Ui_MainWindow()
-#    ui.setupUi(MainWindow)
-#    MainWindow.show()
- 
-    w = MainWindow()
-    w.show()
-     
-    sys.exit(app.exec_())
+            # меняем фон клавиш
+            btn_name = self.btn_name.get(btn)
+            btn_name.setStyleSheet("background-color: rgb(186, 186, 186);")
+
+        if e.event_type == 'up':
+            btn = str(e.name).lower()
+
+            # меняем фон клавиш
+            # RG_num(self.smvls_dict, self.btn_name)
+            btn_name = self.btn_name.get(btn)
+            btn_name.setStyleSheet("background-color: rgb(240, 240, 240);")
+
+            # добавляем 1 к числу нажатой клавиши
+            if btn in self.smvls_dict:
+                self.smvls_dict[btn] += 1
+                self.scr_name[btn].setText(str(self.smvls_dict[btn]))
