@@ -1,3 +1,3 @@
-# keyboard
+# keyboard_gui
 
-Приложение для отслеживания количества нажатых клавиш на клавиатуре
+An application for tracking the number of keys pressed on the keyboard
