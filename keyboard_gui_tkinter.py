@@ -320,8 +320,172 @@ class MyWindow:
                            'right': self.label_right}
         self.label_list = list(self.label_dict)
 
-        print(f'keys_list:  {self.keys_list}')
-        print(f'label_list: {self.label_list}')
+        self.score_esc = Label(self.root, text='0', bg=self.key_color)
+        self.score_f1 = Label(self.root, text='0', bg=self.key_color)
+        self.score_f2 = Label(self.root, text='0', bg=self.key_color)
+        self.score_f3 = Label(self.root, text='0', bg=self.key_color)
+        self.score_f4 = Label(self.root, text='0', bg=self.key_color)
+        self.score_f5 = Label(self.root, text='0', bg=self.key_color)
+        self.score_f6 = Label(self.root, text='0', bg=self.key_color)
+        self.score_f7 = Label(self.root, text='0', bg=self.key_color)
+        self.score_f8 = Label(self.root, text='0', bg=self.key_color)
+        self.score_f9 = Label(self.root, text='0', bg=self.key_color)
+        self.score_f10 = Label(self.root, text='0', bg=self.key_color)
+        self.score_f11 = Label(self.root, text='0', bg=self.key_color)
+        self.score_f12 = Label(self.root, text='0', bg=self.key_color)
+        self.score_print_screen = Label(self.root, text='0', bg=self.key_color)
+        self.score_pause = Label(self.root, text='0', bg=self.key_color)
+        self.score_insert = Label(self.root, text='0', bg=self.key_color)
+        self.score_delete = Label(self.root, text='0', bg=self.key_color)
+        self.score_tilde = Label(self.root, text='0', bg=self.key_color)
+        self.score_1 = Label(self.root, text='0', bg=self.key_color)
+        self.score_2 = Label(self.root, text='0', bg=self.key_color)
+        self.score_3 = Label(self.root, text='0', bg=self.key_color)
+        self.score_4 = Label(self.root, text='0', bg=self.key_color)
+        self.score_5 = Label(self.root, text='0', bg=self.key_color)
+        self.score_6 = Label(self.root, text='0', bg=self.key_color)
+        self.score_7 = Label(self.root, text='0', bg=self.key_color)
+        self.score_8 = Label(self.root, text='0', bg=self.key_color)
+        self.score_9 = Label(self.root, text='0', bg=self.key_color)
+        self.score_0 = Label(self.root, text='0', bg=self.key_color)
+        self.score_minus = Label(self.root, text='0', bg=self.key_color)
+        self.score_equal = Label(self.root, text='0', bg=self.key_color)
+        self.score_backspace = Label(self.root, text='0', bg=self.key_color)
+        self.score_tab = Label(self.root, text='0', bg=self.key_color)
+        self.score_q = Label(self.root, text='0', bg=self.key_color)
+        self.score_w = Label(self.root, text='0', bg=self.key_color)
+        self.score_e = Label(self.root, text='0', bg=self.key_color)
+        self.score_r = Label(self.root, text='0', bg=self.key_color)
+        self.score_t = Label(self.root, text='0', bg=self.key_color)
+        self.score_y = Label(self.root, text='0', bg=self.key_color)
+        self.score_u = Label(self.root, text='0', bg=self.key_color)
+        self.score_i = Label(self.root, text='0', bg=self.key_color)
+        self.score_o = Label(self.root, text='0', bg=self.key_color)
+        self.score_p = Label(self.root, text='0', bg=self.key_color)
+        self.score_op_scq_br = Label(self.root, text='0', bg=self.key_color)
+        self.score_cl_scq_br = Label(self.root, text='0', bg=self.key_color)
+        self.score_slash = Label(self.root, text='0', bg=self.key_color)
+        self.score_caps_lock = Label(self.root, text='0', bg=self.key_color)
+        self.score_a = Label(self.root, text='0', bg=self.key_color)
+        self.score_s = Label(self.root, text='0', bg=self.key_color)
+        self.score_d = Label(self.root, text='0', bg=self.key_color)
+        self.score_f = Label(self.root, text='0', bg=self.key_color)
+        self.score_g = Label(self.root, text='0', bg=self.key_color)
+        self.score_h = Label(self.root, text='0', bg=self.key_color)
+        self.score_j = Label(self.root, text='0', bg=self.key_color)
+        self.score_k = Label(self.root, text='0', bg=self.key_color)
+        self.score_l = Label(self.root, text='0', bg=self.key_color)
+        self.score_semicolon = Label(self.root, text='0', bg=self.key_color)
+        self.score_apostrophe = Label(self.root, text='0', bg=self.key_color)
+        self.score_enter = Label(self.root, text='0', bg=self.key_color)
+        self.score_shift = Label(self.root, text='0', bg=self.key_color)
+        self.score_z = Label(self.root, text='0', bg=self.key_color)
+        self.score_x = Label(self.root, text='0', bg=self.key_color)
+        self.score_c = Label(self.root, text='0', bg=self.key_color)
+        self.score_v = Label(self.root, text='0', bg=self.key_color)
+        self.score_b = Label(self.root, text='0', bg=self.key_color)
+        self.score_n = Label(self.root, text='0', bg=self.key_color)
+        self.score_m = Label(self.root, text='0', bg=self.key_color)
+        self.score_comma = Label(self.root, text='0', bg=self.key_color)
+        self.score_dot = Label(self.root, text='0', bg=self.key_color)
+        self.score_slash_f = Label(self.root, text='0', bg=self.key_color)
+        self.score_right_shift = Label(self.root, text='0', bg=self.key_color)
+        self.score_ctrl = Label(self.root, text='0', bg=self.key_color)
+        self.score_fn = Label(self.root, text='0', bg=self.key_color)
+        self.score_left_windows = Label(self.root, text='0', bg=self.key_color)
+        self.score_alt = Label(self.root, text='0', bg=self.key_color)
+        self.score_space = Label(self.root, text='0', bg=self.key_color)
+        self.score_right_alt = Label(self.root, text='0', bg=self.key_color)
+        self.score_menu = Label(self.root, text='0', bg=self.key_color)
+        self.score_right_ctrl = Label(self.root, text='0', bg=self.key_color)
+        self.score_left = Label(self.root, text='0', bg=self.key_color)
+        self.score_up = Label(self.root, text='0', bg=self.key_color)
+        self.score_down = Label(self.root, text='0', bg=self.key_color)
+        self.score_right = Label(self.root, text='0', bg=self.key_color)
+
+        self.score_dict = {'esc': self.score_esc,
+                           'f1': self.score_f1,
+                           'f2': self.score_f2,
+                           'f3': self.score_f3,
+                           'f4': self.score_f4,
+                           'f5': self.score_f5,
+                           'f6': self.score_f6,
+                           'f7': self.score_f7,
+                           'f8': self.score_f8,
+                           'f9': self.score_f9,
+                           'f10': self.score_f10,
+                           'f11': self.score_f11,
+                           'f12': self.score_f12,
+                           'print screen': self.score_print_screen,
+                           'pause': self.score_pause,
+                           'insert': self.score_insert,
+                           'delete': self.score_delete,
+                           '`': self.score_tilde,
+                           '1': self.score_1,
+                           '2': self.score_2,
+                           '3': self.score_3,
+                           '4': self.score_4,
+                           '5': self.score_5,
+                           '6': self.score_6,
+                           '7': self.score_7,
+                           '8': self.score_8,
+                           '9': self.score_9,
+                           '0': self.score_0,
+                           '-': self.score_minus,
+                           '=': self.score_equal,
+                           'backspace': self.score_backspace,
+                           'tab': self.score_tab,
+                           'q': self.score_q,
+                           'w': self.score_w,
+                           'e': self.score_e,
+                           'r': self.score_r,
+                           't': self.score_t,
+                           'y': self.score_y,
+                           'u': self.score_u,
+                           'i': self.score_i,
+                           'o': self.score_o,
+                           'p': self.score_p,
+                           '[': self.score_op_scq_br,
+                           ']': self.score_cl_scq_br,
+                           '\\': self.score_slash,
+                           'caps lock': self.score_caps_lock,
+                           'a': self.score_a,
+                           's': self.score_s,
+                           'd': self.score_d,
+                           'f': self.score_f,
+                           'g': self.score_g,
+                           'h': self.score_h,
+                           'j': self.score_j,
+                           'k': self.score_k,
+                           'l': self.score_l,
+                           ';': self.score_semicolon,
+                           "'": self.score_apostrophe,
+                           'enter': self.score_enter,
+                           'shift': self.score_shift,
+                           'z': self.score_z,
+                           'x': self.score_x,
+                           'c': self.score_c,
+                           'v': self.score_v,
+                           'b': self.score_b,
+                           'n': self.score_n,
+                           'm': self.score_m,
+                           ',': self.score_comma,
+                           '.': self.score_dot,
+                           '/': self.score_slash_f,
+                           'right shift': self.score_right_shift,
+                           'ctrl': self.score_ctrl,
+                           'fn': self.score_fn,
+                           'left windows': self.score_left_windows,
+                           'alt': self.score_alt,
+                           'space': self.score_space,
+                           'right alt': self.score_right_alt,
+                           'menu': self.score_menu,
+                           'right ctrl': self.score_right_ctrl,
+                           'left': self.score_left,
+                           'up': self.score_up,
+                           'down': self.score_down,
+                           'right': self.score_right}
+        self.score_list = list(self.score_dict)
 
         self.draw_keys()
 
@@ -336,7 +500,7 @@ class MyWindow:
 
     # когда отпустили клавишу прибавляем единицу к счету нажатия
     def hook_pressed_keys(self, e):
-        key = str(e.name).lower()
+        key = self.translate_keys(str(e.name).lower())
         try:
             key_item = self.keys_canvas_dict[key]
 
@@ -355,9 +519,23 @@ class MyWindow:
                                        fill=self.key_color,
                                        outline=self.key_border_color)
                 self.keys_dict[key][5] += 1
+                self.score_dict[key].config(text=str(self.keys_dict[key][5]))
+
 
         except:
             print(f'Такой клавиши нет: {key}')
+
+    def translate_keys(self, key):
+        rus = ['й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ',
+               'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э',
+               'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.']
+        eng = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']',
+               'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'",
+               'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/']
+        if key in rus:
+            return eng[rus.index(key)]
+        else:
+            return key
 
     # Перерисовываем клавиши
     def redraw_keys(self):
@@ -377,7 +555,7 @@ class MyWindow:
                 row_count += 1
         keys_height = (self.window_height - ((self.keys_indent * row_count) + self.keys_indent)) / row_count
 
-        # координаты первой клавиши
+        # Координаты первой клавиши
         x0 = 2
         x1 = (x0 + row_keys_width_total[1] * self.row_keys_width_weight[1][0])
         y0 = 0
@@ -412,19 +590,24 @@ class MyWindow:
 
                     # Меняем координаты названия соответствующей клавиши
                     self.label_dict[self.label_list[count]].place(
-                        x=x0+4,
-                        y=y0+4,
-                        width=x1-x0-7,
-                        height=keys_height-7
+                        x=x0 + 4,
+                        y=y0 + 4,
+                        width=x1 - x0 - 7,
+                        height=keys_height - 25
+                    )
+
+                    # Меняем координаты счета соответствующей клавиши
+                    self.score_dict[self.score_list[count]].place(
+                        x=x0 + 4,
+                        y=y0 + keys_height - 25 + 6,
+                        width=x1 - x0 - 7,
+                        height=16
                     )
 
                     count += 1
 
         for i in range(count):
             self.label_dict[self.label_list[i]].update_idletasks()
-
-        # self.label_KEY_NAME.place(x=x0, y=y0, width=x1, height=y1)
-        # self.label_KEY_NAME.update_idletasks()
 
     # Отрисовываем клавиши
     def draw_keys(self):
@@ -458,14 +641,16 @@ class MyWindow:
             if self.window_width != self.root.winfo_width() or \
                     self.window_height != self.root.winfo_height():
 
+                # Изменение ширины окна
                 if self.window_width != self.root.winfo_width():
-                    self.window_width = self.root.winfo_width()  # Ширина
+                    self.window_width = self.root.winfo_width()
                     self.canvas.configure(width=self.window_width)
 
                     self.redraw_keys()
 
+                # Изменение высоты окна
                 if self.window_height != self.root.winfo_height():
-                    self.window_height = self.root.winfo_height()  # Высота
+                    self.window_height = self.root.winfo_height()
                     self.canvas.configure(height=self.window_height)
 
                     self.redraw_keys()
