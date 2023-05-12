@@ -1,16 +1,12 @@
-from tkinter import Tk, Canvas, Label
-import keyboard
-
-
 class MyWindow:
-    def __init__(self, width, height):
+    def __init__(self):
         # Ширина и высота окна
-        self.window_width = width
-        self.window_height = height
+        self.window_width = 100
+        self.window_height = 100
 
         self.root = Tk()
 
-        self.root.title('test3.py')  # название окна
+        self.root.title('keyboard lol')  # название окна
         self.root.overrideredirect(False)  # отключить кнопки окна (свернуть, на весь экран, закрыть)
 
         # Задаем параметры геометрии окна (ширина, высота, расположение)
@@ -18,14 +14,6 @@ class MyWindow:
 
         # Регистрируем (bind) изменение параметров окна
         self.root.bind('<Configure>', self.window_resize)
-
-        # Параметры холста
-        self.canvas = Canvas(self.root,
-                             width=self.window_width,
-                             height=self.window_height,
-                             bg='lightgray'
-                             )
-        self.canvas.pack()
 
         # 'key': [x0, y0, x1, y1, ряд, счет нажатий]
         self.keys_dict = {
@@ -118,10 +106,19 @@ class MyWindow:
             'right': [434, 96, 464, 126, '5', 0]
         }
 
+        self.background_color = 'black'
         self.key_color = 'lightgray'
-        self.key_border_color = 'gray'
-        self.key_pressed_color = 'gray'
-        self.key_pressed_border_color = 'red'
+        self.key_color_border = 'gray'
+        self.key_color_pressed = 'gray'
+        self.key_color_pressed_border = 'red'
+
+        # Параметры холста
+        self.canvas = Canvas(self.root,
+                             width=self.window_width,
+                             height=self.window_height,
+                             bg=self.background_color
+                             )
+        self.canvas.pack()
 
         self.keys_indent = 2  # отступ клавиш
 
@@ -487,6 +484,9 @@ class MyWindow:
                            'right': self.score_right}
         self.score_list = list(self.score_dict)
 
+        self.score_file = 'score.json'
+        self.save_load_score()
+
         self.draw_keys()
 
         self.keyboard_activate()
@@ -505,35 +505,40 @@ class MyWindow:
             key_item = self.keys_canvas_dict[key]
 
             if e.event_type == 'down':
-                # меняем фон клавиш
+                # Меняем фон клавиш
                 self.canvas.itemconfig(key_item,
-                                       fill=self.key_pressed_color,
-                                       outline=self.key_pressed_border_color)
+                                       fill=self.key_color_pressed,
+                                       outline=self.key_color_pressed_border)
 
             if e.event_type == 'up':
-                if key == 'esc':
-                    self.root.quit()
-
-                # меняем фон клавиш
+                # Меняем фон клавиш
                 self.canvas.itemconfig(key_item,
                                        fill=self.key_color,
-                                       outline=self.key_border_color)
+                                       outline=self.key_color_border)
+
+                # Счет нажатых клавиш
                 self.keys_dict[key][5] += 1
                 self.score_dict[key].config(text=str(self.keys_dict[key][5]))
 
+                # Сохраняем счет нажатий клавиш
+                filehandler = open(self.score_file, 'w+')
+                json.dump(self.keys_dict, filehandler)
 
         except:
             print(f'Такой клавиши нет: {key}')
 
+    # Перевод клавиш с кириллицы на латиницу (х = [, ъ = ])
     def translate_keys(self, key):
-        rus = ['й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ',
-               'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э',
-               'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.']
-        eng = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']',
-               'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'",
-               'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/']
-        if key in rus:
-            return eng[rus.index(key)]
+        rus_keys_name = ['й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ',
+                         'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э',
+                         'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.',
+                         'alt gr']
+        eng_keys_name = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']',
+                         'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'",
+                         'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/',
+                         'right alt']
+        if key in rus_keys_name:
+            return eng_keys_name[rus_keys_name.index(key)]
         else:
             return key
 
@@ -588,26 +593,26 @@ class MyWindow:
                     self.canvas.coords(self.keys_canvas_dict[f'{self.keys_list[count]}'],
                                        x0, y0, x1, y1)
 
+                    label_width = x1 - x0 - 7
+                    label_height = keys_height * 0.5
+
                     # Меняем координаты названия соответствующей клавиши
                     self.label_dict[self.label_list[count]].place(
                         x=x0 + 4,
                         y=y0 + 4,
-                        width=x1 - x0 - 7,
-                        height=keys_height - 25
+                        width=label_width,
+                        height=label_height
                     )
 
                     # Меняем координаты счета соответствующей клавиши
                     self.score_dict[self.score_list[count]].place(
                         x=x0 + 4,
-                        y=y0 + keys_height - 25 + 6,
-                        width=x1 - x0 - 7,
-                        height=16
+                        y=y0 + label_height + 6,
+                        width=label_width,
+                        height=label_height - 10
                     )
 
                     count += 1
-
-        for i in range(count):
-            self.label_dict[self.label_list[i]].update_idletasks()
 
     # Отрисовываем клавиши
     def draw_keys(self):
@@ -655,8 +660,30 @@ class MyWindow:
 
                     self.redraw_keys()
 
+    # Файл счета нажатий клавиш
+    def save_load_score(self):
+        file_name = self.score_file
 
-width = 100
-height = 100
+        # Если файл существует
+        if os.path.exists(file_name):
+            filehandler = open(file_name, 'r')
+            self.keys_dict = json.load(filehandler)
 
-win = MyWindow(width, height)
+            score_dict_len = len(self.score_dict)
+            key_name = list(self.score_dict)
+            for i in range(score_dict_len):
+                key = key_name[i]
+                self.score_dict[key].config(text=str(self.keys_dict[key][5]))
+
+        else:
+            filehandler = open(file_name, 'w+')
+            json.dump(self.keys_dict, filehandler)
+
+
+if __name__ == '__main__':
+    from tkinter import Tk, Canvas, Label
+    import keyboard
+    import json
+    import os.path
+
+    win = MyWindow()
