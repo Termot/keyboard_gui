@@ -484,6 +484,7 @@ class MyWindow:
                            'right': self.score_right}
         self.score_list = list(self.score_dict)
 
+        # Загружаем счет клавиш (или создаем файл со счетом клавиш)
         self.score_file = 'score.json'
         self.save_load_score()
 
@@ -524,11 +525,12 @@ class MyWindow:
                 filehandler = open(self.score_file, 'w+')
                 json.dump(self.keys_dict, filehandler)
 
-        except:
-            print(f'Такой клавиши нет: {key}')
+        except Exception as ex:
+            print(f'Такой клавиши нет: {ex}')
 
     # Перевод клавиш с кириллицы на латиницу (х = [, ъ = ])
-    def translate_keys(self, key):
+    @staticmethod
+    def translate_keys(key):
         rus_keys_name = ['й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ',
                          'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э',
                          'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.',
